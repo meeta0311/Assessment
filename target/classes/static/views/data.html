@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row" data-ng-if="!dataDetails">
+        <h3>Hi {{inp.userName}}</h3>
+        <label>Input Numbers</label> <input type="text" ng-model="inp.inputNumber" class="input-sm custom-width spacing"/>{{inputNumber}}
+        <div data-ng-if="inp.inputNumber && viewData.inputArray.length>=50">Can't add more than 50 numbers</div>
+        <div data-ng-if="inp.inputNumber<0 || inp.inputNumber>100">Invalid Input.Allowed range is between 0 to 100.</div>
+    </div>
+    <hr/>
+    <div class="row" data-ng-if="!dataDetails">
+        <button data-ng-click="addMoreNos(inp.inputNumber)" data-ng-disabled="!inp.inputNumber || inp.inputNumber<0 || inp.inputNumber>100|| (viewData.inputArray.length>=50)" class="btn btn-sm btn-info">Add More Numbers</button>
+        <button data-ng-disabled="viewData.inputArray.length==0" ng-click="saveUser()" class="btn btn-sm btn-info">Save User</button>
+        <!--<button data-ng-click="getUser(inp.userName)" class="btn btn-sm btn-info">View</button>-->
+    </div>
+    <hr/>
+    <div class="row" data-ng-if="dataDetails">
+        <button data-ng-click="goToHome()" class="btn btn-sm btn-info">Home</button>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Input Array</th>
+                <th>Sorted Array</th>
+                <th>Sort Time</th>
+                <th>No. of Swaps</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{dataDetails.userName}}</td>
+                <td><span ng-repeat="number in dataDetails.viewDataDto.inputArray track by $index" class="spacing">{{number}}</span></td>
+                <td><span ng-repeat="number in dataDetails.viewDataDto.outArray track by $index" class="spacing">{{number}}</span></td>
+                <td>{{dataDetails.viewDataDto.timeToSort}}</td>
+                <td>{{dataDetails.viewDataDto.noOfComparisons}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
